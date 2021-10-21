@@ -3,22 +3,26 @@ import { Container, Image } from "react-bootstrap";
 import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
 import BlogLike from "../../components/likes/BlogLike";
-import posts from "../../data/posts.json";
 import "./styles.css";
 class Blog extends Component {
   state = {
     blog: {},
     loading: true,
   };
+ id = this.props.match.params.id
+
+ fetchBlogPost = async () => {
+   const response = await fetch(`http://localhost:3001/posts/${this.id}`)
+  const data = await response.json()
+  await console.log(data)
+  await this.setState({blog: data.findPost, loading: false})
+  await console.log("REEEEEEEEEEEEE",this.state)
+ }
   componentDidMount() {
-    const { id } = this.props.match.params;
-    console.log(posts);
-    const blog = posts.find((post) => post._id.toString() === id);
-    if (blog) {
-      this.setState({ blog, loading: false });
-    } else {
-      this.props.history.push("/404");
-    }
+    console.log(this.id)
+    this.fetchBlogPost()
+
+    
   }
 
   render() {

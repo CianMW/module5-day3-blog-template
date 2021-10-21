@@ -1,28 +1,38 @@
 import React, { Component } from "react";
 import { Row, Col } from "react-bootstrap";
 import BlogItem from "../blog-item";
-import posts from "../../../data/posts.json";
 export default class BlogList extends Component {
+    state = {
+        posts : [],
+    }
 
 
   fetchData = async () =>{
 
-    fetch('http://localhost:3001/posts')
-    .then(response => response.json())
-    .then(data => console.log("HERE ARE THE POSTS", data));
+    const response = await fetch('http://localhost:3001/posts')
+     const data = await response.json()
+       console.log(data)
+     await this.setState({posts : data});
   }
   componentDidMount = () =>{
     this.fetchData()
+    console.log(this.state.posts)
   }
   render() {
     return (
       <Row>
-        {posts.map((post) => (
+        {this.state.posts ? (<>
+          {this.state.posts.map((post) => 
           <Col md={4} style={{ marginBottom: 50 }}>
             <BlogItem key={post.title} {...post} />
-          </Col>
-        ))}
+          </Col>)}
+          </>) : (<></>)  }
+        
+        
+     
+        
       </Row>
-    );
-  }
+
+)
+}
 }
