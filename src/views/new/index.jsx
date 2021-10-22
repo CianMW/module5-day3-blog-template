@@ -7,23 +7,24 @@ export default class NewBlogPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "",
-      category: "",
-      title: "",
-      cover: "http://placeimg.com/640/480",
-      author: {
-        name: "",
+        text: "",
+        category: "",
+        title: "",
+        cover: "http://placeimg.com/640/480",
+        author: {
+          name: "",
+        },
+        readTime: {
+          value: 2,
+          unit: "minute",
       },
-      readTime: {
-        value: 2,
-        unit: "minute",
-      },
+      coverPhoto: [],
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(value) {
-    this.setState({ text: value });
+    this.setState({...this.state, text: value });
     console.log(this.state);
   }
   handleCategory(value) {
@@ -39,25 +40,64 @@ export default class NewBlogPost extends Component {
     console.log(this.state);
   }
 
+  target = (e) => {
+    console.log(e.target.files[0]);
+    if (e.target && e.target.files[0]) {
+      this.setState({ ...this.state, coverPhoto: e.target.files[0] });
+    }
+  };
+
   postNewArticle = async (e) => {
     e.preventDefault();
+
+    let articleObject = {
+      text: this.state.text,
+      category: this.state.category,
+      title: this.state.title,
+      cover: "http://placeimg.com/640/480",
+      author: {
+        name: this.state.name,
+      },
+      readTime: {
+        value: 2,
+        unit: "minute",
+    },
+
+    }
     try {
-      const newData = this.state;
       const response = await fetch("http://localhost:3001/posts", {
         method: "POST",
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newData),
+        body: JSON.stringify(articleObject),
       });
       if (response.ok) {
+
+
         console.log(response.json());
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+
+  coverPhotoFetch = (id) =>{
+    let formData = new FormData();
+    formData.append("post", this.state.coverPhoto)
+ fetch(
+      `http://localhost:3001/files/${id}/cover`,
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization:token,
+        },
+      }
+    );
+  }
 
   render() {
     return (
@@ -116,6 +156,22 @@ export default class NewBlogPost extends Component {
             >
               Submit
             </Button>
+          </Form.Group>
+        </Form>
+
+        <Form>
+          <Form.Group className="mb-3" controlId="#1">
+            <Form.Control
+              type="file"
+              onChange={(e) => this.target(e)}
+              rows={3}
+              placeholder="What do you want to talk about?"
+              // name="description"
+
+              id="description"
+              rows="4"
+              cols="81"
+            />
           </Form.Group>
         </Form>
       </Container>

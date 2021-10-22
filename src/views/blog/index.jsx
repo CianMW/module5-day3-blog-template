@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Container, Image } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
 import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
 import BlogLike from "../../components/likes/BlogLike";
 import "./styles.css";
+import CommentSection from "../../components/blog/comments/CommentSection.jsx"
+import AddComments from "../../components/blog/addComments/AddComments";
 class Blog extends Component {
   state = {
     blog: {},
@@ -16,7 +18,7 @@ class Blog extends Component {
   const data = await response.json()
   await console.log(data)
   await this.setState({blog: data.findPost, loading: false})
-  await console.log("REEEEEEEEEEEEE",this.state)
+  await console.log("Here is the state",this.state)
  }
   componentDidMount() {
     console.log(this.id)
@@ -50,6 +52,23 @@ class Blog extends Component {
             </div>
 
             <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
+          </Container>
+          <Container className="mt-4">
+            <Row>
+              <div>
+                <h3>Comments</h3>
+              </div>
+              <Col>
+              <AddComments/>
+              </Col>
+              <Col md={12} className="pt-5 px-3">
+                {console.log("THIS IS THE COMMENTS", blog.comments)}
+                {blog.comments.map(comment =>
+                  <CommentSection singleComment={comment} />
+                  )}
+              </Col>
+
+            </Row>
           </Container>
         </div>
       );

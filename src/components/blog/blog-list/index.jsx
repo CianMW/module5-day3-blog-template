@@ -27,12 +27,8 @@ export default class BlogList extends Component {
             <BlogItem key={post.title} {...post} />
           </Col>)}
           </>) : (<></>)  }
-        
-        
-     
-        
       </Row>
 
-)
-}
-}
+          )
+      }
+  }
