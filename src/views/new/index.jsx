@@ -18,7 +18,7 @@ export default class NewBlogPost extends Component {
           value: 2,
           unit: "minute",
       },
-      coverPhoto: [],
+      photoCover: [],
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -43,7 +43,7 @@ export default class NewBlogPost extends Component {
   target = (e) => {
     console.log(e.target.files[0]);
     if (e.target && e.target.files[0]) {
-      this.setState({ ...this.state, coverPhoto: e.target.files[0] });
+      this.setState({ ...this.state, photoCover: e.target.files[0] });
     }
   };
 
@@ -74,8 +74,8 @@ export default class NewBlogPost extends Component {
         body: JSON.stringify(articleObject),
       });
       if (response.ok) {
-
-
+        let newData = response.json()
+        
         console.log(response.json());
       }
     } catch (error) {
@@ -92,9 +92,6 @@ export default class NewBlogPost extends Component {
       {
         method: "POST",
         body: formData,
-        headers: {
-          Authorization:token,
-        },
       }
     );
   }
