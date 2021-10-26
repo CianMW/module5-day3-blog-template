@@ -9,7 +9,7 @@ export default class BlogList extends Component {
 
   fetchData = async () =>{
 
-    const response = await fetch('${process.env.BE_REQS}/posts')
+    const response = await fetch(`https://backend-blog-practice.herokuapp.com/posts`)
      const data = await response.json()
        console.log(data)
      await this.setState({posts : data});
