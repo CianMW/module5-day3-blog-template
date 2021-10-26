@@ -14,7 +14,7 @@ class Blog extends Component {
  id = this.props.match.params.id
 
  fetchBlogPost = async () => {
-   const response = await fetch(`${process.env.BE_REQS}/posts/${this.id}`)
+   const response = await fetch(`${process.env.REACT_APP_BE_REQS}/posts/${this.id}`)
   const data = await response.json()
   await console.log(data)
   await this.setState({blog: data.findPost, loading: false})

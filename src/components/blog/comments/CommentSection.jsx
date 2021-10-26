@@ -9,7 +9,7 @@ class CommentSection extends Component {
   };
 
   fetchComments = async () => {
-    const resp = await fetch(`${process.env.BE_REQS}/posts/${this.state.blog_id}/comments`)
+    const resp = await fetch(`${process.env.REACT_APP_BE_REQS}/posts/${this.state.blog_id}/comments`)
     if(resp){
        const commentArray = await resp.json()
         console.log(commentArray)
