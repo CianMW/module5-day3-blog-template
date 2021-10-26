@@ -62,10 +62,8 @@ class Blog extends Component {
               <AddComments/>
               </Col>
               <Col md={12} className="pt-5 px-3">
-                {console.log("THIS IS THE COMMENTS", blog.comments)}
-                {blog.comments.map(comment =>
-                  <CommentSection singleComment={comment} />
-                  )}
+                {console.log("THIS IS BLOG ID", blog.id)}
+                  <CommentSection blog_id={blog.id} />
               </Col>
 
             </Row>

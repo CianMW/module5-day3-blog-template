@@ -47,6 +47,29 @@ export default class NewBlogPost extends Component {
     }
   };
 
+  coverPhotoFetch = async (id) =>{
+    console.log("the id for posting the photo is: ", id )
+    let formData = new FormData();
+    try{
+   const response = await formData.append("cover", this.state.photoCover)
+ fetch(
+      `http://localhost:3001/files/${id}/cover`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    if (response) {
+      let result = await response.json()
+      
+      console.log(result);
+    }
+  } catch(error) {
+    console.log(error);
+  }
+  }
+
+
   postNewArticle = async (e) => {
     e.preventDefault();
 
@@ -56,7 +79,7 @@ export default class NewBlogPost extends Component {
       title: this.state.title,
       cover: "http://placeimg.com/640/480",
       author: {
-        name: this.state.name,
+        name: this.state.author.name,
       },
       readTime: {
         value: 2,
@@ -74,9 +97,12 @@ export default class NewBlogPost extends Component {
         body: JSON.stringify(articleObject),
       });
       if (response.ok) {
-        let newData = response.json()
+        let newData = await response.json()
+        console.log(newData);
+
+        await this.coverPhotoFetch(newData.id)
         
-        console.log(response.json());
+
       }
     } catch (error) {
       console.log(error);
@@ -84,18 +110,7 @@ export default class NewBlogPost extends Component {
   };
 
 
-  coverPhotoFetch = (id) =>{
-    let formData = new FormData();
-    formData.append("post", this.state.coverPhoto)
- fetch(
-      `http://localhost:3001/files/${id}/cover`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-  }
-
+  
   render() {
     return (
       <Container className="new-blog-container">
@@ -165,7 +180,6 @@ export default class NewBlogPost extends Component {
               placeholder="What do you want to talk about?"
               // name="description"
 
-              id="description"
               rows="4"
               cols="81"
             />
