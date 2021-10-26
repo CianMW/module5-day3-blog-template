@@ -53,8 +53,8 @@ export default class NewBlogPost extends Component {
     try{
    const response = await formData.append("cover", this.state.photoCover)
  fetch(
-      `http://localhost:3001/files/${id}/cover`,
-      {
+      `${process.env.BE_REQS}/files/${id}/cover`,
+      { 
         method: "POST",
         body: formData,
       }
@@ -88,7 +88,7 @@ export default class NewBlogPost extends Component {
 
     }
     try {
-      const response = await fetch("http://localhost:3001/posts", {
+      const response = await fetch(`${process.env.BE_REQS}/posts`, {
         method: "POST",
         mode: "cors",
         headers: {
