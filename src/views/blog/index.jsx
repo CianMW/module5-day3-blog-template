@@ -6,6 +6,7 @@ import BlogLike from "../../components/likes/BlogLike";
 import "./styles.css";
 import CommentSection from "../../components/blog/comments/CommentSection.jsx"
 import AddComments from "../../components/blog/addComments/AddComments";
+import ArticleDownload from "./ArticleDownload";
 class Blog extends Component {
   state = {
     blog: {},
@@ -37,10 +38,17 @@ class Blog extends Component {
           <Container>
             <Image className="blog-details-cover" src={blog.cover} fluid />
             <h1 className="blog-details-title">{blog.title}</h1>
+            <div className="mt-3 blog-main-text">
+           <div dangerouslySetInnerHTML={{__html: blog.text}}>
+            </div>
+            </div>
 
             <div className="blog-details-container">
               <div className="blog-details-author">
                 <BlogAuthor {...blog.author} />
+              </div>
+              <div>
+                <ArticleDownload id={blog.id}/>
               </div>
               <div className="blog-details-info">
                 <div>{blog.createdAt}</div>
@@ -59,7 +67,7 @@ class Blog extends Component {
                 <h3>Comments</h3>
               </div>
               <Col>
-              <AddComments/>
+              <AddComments blog_id={blog.id}/>
               </Col>
               <Col md={12} className="pt-5 px-3">
                 {console.log("THIS IS BLOG ID", blog.id)}
