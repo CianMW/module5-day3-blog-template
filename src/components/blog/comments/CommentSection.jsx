@@ -20,7 +20,7 @@ class CommentSection extends Component {
   }
 
 
-  componentDidMount = () =>{
+  componentDidMount = () => {
 
          this.fetchComments()
   
