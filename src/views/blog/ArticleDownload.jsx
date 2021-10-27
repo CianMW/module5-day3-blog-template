@@ -8,10 +8,7 @@ const ArticleDownload = ({id}) => {
 const downloadAsPdf = async (e) =>{
         const response = await fetch(`${process.env.REACT_APP_BE_REQS}/pdf/${id}`)
        const data = await response.json()
-       await console.log(data)
-       await this.setState({blog: data.findPost, loading: false})
-       await console.log("Here is the state",this.state)
-    }
+       await console.log(data)    }
 
 
 
