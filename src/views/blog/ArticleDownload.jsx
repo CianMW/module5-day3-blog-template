@@ -2,21 +2,31 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 
-const ArticleDownload = ({id}) => {
+class ArticleDownload extends Component {
+    state = {
+        id : this.props.id
+    }
 
 
-const downloadAsPdf = async (e) =>{
-        const response = await fetch(`${process.env.REACT_APP_BE_REQS}/pdf/${id}`)
-       const data = await response.json()
-       await console.log(data)    }
-
-
-
-    return(
+//  downloadAsPdf = (e) =>{
+//     console.log("this is the id!: ", this.state.id)
+//     try {
+//         const response = await fetch(`${process.env.REACT_APP_BE_REQS}/pdf/${this.state.id}`)
+//         if(response){        
+//             await console.log(response.json())
+//         }
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+    render(){ 
+        return(
         <>
-         <Button variant="success" onClick={e => downloadAsPdf(e)} >Download as pdf</Button>
+         <a href={`${process.env.REACT_APP_BE_REQS}/pdf/${this.state.id}` } target="_blank" ><Button variant="success">Download as pdf</Button></a>
         </>
-    )
+    )}
+
+   
 }
 
 export default ArticleDownload
