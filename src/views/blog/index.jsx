@@ -24,8 +24,6 @@ class Blog extends Component {
   componentDidMount() {
     console.log(this.id)
     this.fetchBlogPost()
-
-    
   }
 
   render() {
