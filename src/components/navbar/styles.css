@@ -18,3 +18,7 @@
   width: 160px;
   text-decoration: none;
 }
+
+.btn-group.bg-dark:focus{
+border:null
+}

@@ -20,6 +20,7 @@ class Blog extends Component {
   await console.log(data)
   await this.setState({blog: data.findPost, loading: false})
   await console.log("Here is the state",this.state)
+
  }
   componentDidMount() {
     console.log(this.id)

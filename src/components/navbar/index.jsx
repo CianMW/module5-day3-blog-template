@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Container, Navbar, Button } from "react-bootstrap";
+import { Container, ButtonGroup, Navbar, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./styles.css";
 export default class NavBar extends Component {
   render() {
     return (
-      <Navbar expand="lg" className="blog-navbar" fixed="top">
+      <Navbar expand="lg" className=" blog-navbar" fixed="top">
         <Container className="justify-content-between">
           <Navbar.Brand as={Link} to="/">
             <img className="blog-navbar-brand" alt="logo" src={logo} />
@@ -30,6 +30,27 @@ export default class NavBar extends Component {
             </svg>
             Post Article
           </Button>
+          <ButtonGroup className="bg-dark" aria-label="Basic example">
+          <Button
+            as={Link}
+            to="/login"
+            className="loginSignup blog-navbar-add-button bg-dark d-flex"
+            size="lg"
+            style={{textAlign:"center"}}
+          >
+            Log in
+          </Button>
+          <Button
+            as={Link}
+            to="/signup"
+            className="loginSignup blog-navbar-add-button bg-dark"
+            size="lg"
+          >
+            Sign Up
+          </Button>
+
+           
+          </ButtonGroup>
         </Container>
       </Navbar>
     );
